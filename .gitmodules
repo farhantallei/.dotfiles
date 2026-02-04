@@ -1,3 +1,9 @@
 [submodule "wezterm"]
 	path = wezterm
 	url = git@github.com:farhantallei/wezterm.git
+[submodule "fish"]
+	path = fish
+	url = git@github.com:farhantallei/fish.git
+[submodule "nvim"]
+	path = nvim
+	url = git@github.com:farhantallei/nvim.git
