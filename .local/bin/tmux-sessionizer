@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# tmux-sessionizer — fzf picker via zoxide → create/switch tmux session OR open new window.
+# Usage:
+#   tmux-sessionizer            → fzf picker, create/switch session named after dir
+#   tmux-sessionizer --window   → fzf picker, new window in current session at dir
+#   tmux-sessionizer <dir>      → use given dir, create/switch session
+
+mode="session"
+selected=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --window) mode="window"; shift ;;
+    *) selected="$1"; shift ;;
+  esac
+done
+
+if [[ -z "$selected" ]]; then
+  selected=$(zoxide query -l | fzf)
+fi
+
+if [[ -z "$selected" ]]; then
+  exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+
+if [[ "$mode" == "window" ]]; then
+  if [[ -z $TMUX ]]; then
+    # Not inside tmux — fallback to session creation
+    tmux new-session -s "$selected_name" -c "$selected"
+  else
+    tmux new-window -c "$selected"
+  fi
+  exit 0
+fi
+
+# Session mode
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  tmux new-session -s "$selected_name" -c "$selected"
+  exit 0
+fi
+
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+  tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+tmux switch-client -t "$selected_name"

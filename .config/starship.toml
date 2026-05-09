@@ -1,0 +1,8 @@
+# [cmd_duration]
+# disabled = true
+#
+[time]
+disabled = false
+format = "[$time]($style) "
+time_format = "%Y-%m-%d %H:%M:%S"
+style = "cyan"

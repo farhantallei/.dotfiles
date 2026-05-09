@@ -1,0 +1,9 @@
+[mgr]
+prepend_keymap = [
+  { on = ["g", "v"],     run = "cd ~/vault",        desc = "Cd to vault" },
+  { on = ["g", "u"],     run = "cd ~/utb",          desc = "Cd to ~/utb (kampus)" },
+  { on = ["g", "c"],     run = "cd ~/.config",      desc = "Cd to ~/.config" },
+  { on = ["g", "D"],     run = "cd ~/Downloads",    desc = "Cd to ~/Downloads" },
+  { on = "<C-s>",        run = 'shell "$SHELL" --block', desc = "Open shell here" },
+  { on = "!",            run = 'shell "$SHELL" --block', desc = "Open shell here" },
+]
