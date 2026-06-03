@@ -5,4 +5,5 @@ function fish_user_key_bindings
     bind \ef forward-word
     bind \e\[A history-search-backward
     bind \e\[B history-search-forward
+    bind \eo 'open .; commandline -f repaint'
 end

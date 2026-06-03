@@ -12,9 +12,11 @@ alias vt 'nvim ~/.tmux.conf'
 alias vs 'nvim ~/.ssh/config'
 alias vy 'nvim ~/.config/yazi'
 
-alias cl 'command claude --model default'
+alias cl 'command claude --model default --permission-mode auto'
 alias claude cl
-alias clv 'cd ~/vault && command claude --model sonnet'
+alias clv 'cd ~/vault && command claude --model sonnet --permission-mode auto'
+
+alias pc 'pwd | pbcopy'
 
 alias gv 'cd ~/vault'
 
